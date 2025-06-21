@@ -10,6 +10,9 @@
 
 using UnityEngine;
 
+/// <summary>
+/// EasyTrace utility class providing various raycast and debug helpers.
+/// </summary>
 public static class Trace
 {
     public const float DEBUG_DRAW_DURATION = 1f;
@@ -112,11 +115,9 @@ public static class Trace
         Debug.DrawLine(lastPosition, position, color, duration);
     }
 
-
     // ONLY WORKS IN EDITOR
-    public static void DrawDebugSphere(Vector3 position, float radius, Color color, float duration)
+    public static void DrawDebugSphere(Vector3 position, float radius, Color color, float duration, int segments = 20)
     {
-        int segments = 20;
         float step = Mathf.PI * 2 / segments;
 
         for (int i = 0; i < segments; i++)
