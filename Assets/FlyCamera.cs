@@ -6,19 +6,26 @@ public class FlyCamera : MonoBehaviour
     public float lookSpeed = 2f;
     public float sprintMultiplier = 2f;
 
-    float yaw;
-    float pitch;
+    private float yaw;
+    private float pitch;
 
     void Update()
     {
-        // Egér forgatás
+        if (!Input.GetMouseButton(1))
+        { 
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            return;
+        }
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         yaw += lookSpeed * Input.GetAxis("Mouse X");
         pitch -= lookSpeed * Input.GetAxis("Mouse Y");
         pitch = Mathf.Clamp(pitch, -90f, 90f);
 
         transform.eulerAngles = new Vector3(pitch, yaw, 0f);
-
-        // Mozgás
         Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         if (Input.GetKey(KeyCode.Space)) move.y += 1;
         if (Input.GetKey(KeyCode.LeftControl)) move.y -= 1;
