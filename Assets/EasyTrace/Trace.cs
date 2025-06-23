@@ -17,14 +17,33 @@ public static class Trace
 {
     public const float DEBUG_DRAW_DURATION = 1f;
 
+    public static LayerMask DEFAULT_LAYER = LayerMask.GetMask("Default");
+
     /// <summary>
     /// Casts a ray forward from the given transform up to the specified distance, checking for collisions against the specified layer mask.
     /// If debug is enabled, draws the ray, hit point, and remaining ray after the hit.
     /// </summary>
     /// <returns>True if the ray hit an object; otherwise, false.</returns>
     public static bool Forward(Transform origin, float distance, LayerMask mask, out RaycastHit hit, bool debug = false, float duration = DEBUG_DRAW_DURATION)
-    { 
+    {
         Ray ray = new Ray(origin.position, origin.forward);
+        bool valid = Physics.Raycast(ray, out hit, distance, mask);
+        if (debug)
+        {
+            DrawDebugRay(valid, distance, ray, hit, duration);
+        }
+
+        return valid;
+    }
+
+    /// <summary>
+    /// Casts a ray forward from the given transform up to the specified distance, checking for collisions against the specified layer mask.
+    /// If debug is enabled, draws the ray, hit point, and remaining ray after the hit.
+    /// </summary>
+    /// <returns>True if the ray hit an object; otherwise, false.</returns>
+    public static bool Forward(Vector3 origin, Vector3 forward, float distance, LayerMask mask, out RaycastHit hit, bool debug = false, float duration = DEBUG_DRAW_DURATION)
+    {
+        Ray ray = new Ray(origin, forward);
         bool valid = Physics.Raycast(ray, out hit, distance, mask);
         if (debug)
         {
@@ -102,7 +121,7 @@ public static class Trace
     /// Draws a debug sphere at the current position for a given duration and color.
     /// </summary>
     public static void MovementSphere(Vector3 position, float duration, Color color)
-    { 
+    {
         DrawDebugSphere(position, 0.02f, color, duration);
     }
 
