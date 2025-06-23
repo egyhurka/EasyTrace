@@ -149,7 +149,7 @@ public static class Trace
     }
 
     // ONLY WORKS IN EDITOR
-    private static void DrawHitPoint(Vector3 point, float size, Color color, float duration = DEBUG_DRAW_DURATION)
+    public static void DrawHitPoint(Vector3 point, float size, Color color, float duration = DEBUG_DRAW_DURATION)
     {
         Vector3 up = Vector3.up * size;
         Vector3 right = Vector3.right * size;
