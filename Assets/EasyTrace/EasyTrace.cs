@@ -3,11 +3,15 @@ using UnityEngine;
 public class EasyTrace : MonoBehaviour
 {
     public float distance = 5f;
-    public LayerMask layerMask;
-
     public Camera camera;
 
+    private LayerMask layerMask;
     private Vector3 lastPosition;
+
+    private void Start()
+    {
+        layerMask = Trace.DEFAULT_LAYER;
+    }
 
     private void Update()
     {
