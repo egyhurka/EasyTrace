@@ -28,6 +28,19 @@ Just copy `Trace.cs` and (optionally) `EasyTrace.cs` into your Unity project.
 
 ---
 
+## 🛠️ Included Files
+
+| File          | Description                                  |
+|---------------|----------------------------------------------|
+| `Trace.cs`    | Static class for all tracing + debug         |
+| `EasyTrace.cs`| Example MonoBehaviour using `Trace` tools    |
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** – feel free to use, modify, and distribute.
+
 ## 📘 Usage
 
 ### 1. Raycast Forward
@@ -48,6 +61,16 @@ if (Trace.FromScreenPoint(Camera.main, Input.mousePosition, 100f, Trace.DEFAULT_
 }
 ```
 
+### 3. Raycast To a Specified FOV Plane & Remove Same Hits Function
+#### If you do not specify a distance, the rays are cast to the camera’s far clip plane by default.
+```csharp
+// WARNING: You must **remove** the RaycastHit[] declaration here!
+RaycastHit[] hits;
+// The 'hits' array will be assigned by the FieldOfView method via the 'out' parameter.
+Trace.FieldOfView(camera, 20f, layerMask, out hits, true);
+Trace.RemoveSameHits(ref hits);
+```
+
 ### 3. Overlap Sphere
 
 ```csharp
@@ -57,29 +80,32 @@ if (Trace.Sphere(transform.position, 3f, Trace.DEFAULT_LAYER, out Collider[] hit
         Debug.Log("Nearby: " + hit.name);
 }
 ```
-
-### 4. Draw Movement Trail (Editor-only)
-
-```csharp
-Trace.Movement(lastPosition, transform.position, 1f, Color.red);
-lastPosition = transform.position;
-```
-
-### 5. Draw Sphere Movement Trail (Editor-only)
+## Draw Functions (Editor-only)
 
 ```csharp
-Trace.MovementSphere(transform.position, 1f, Color.red);
+public static void DrawDebugRay(bool valid, float distance, Ray ray, RaycastHit hit, float duration = DEBUG_DRAW_DURATION)
 ```
 
-## 🛠️ Included Files
+```csharp
+public static void DrawMovement(Vector3 lastPosition, Vector3 position, float duration, Color color)
+```
 
-| File          | Description                                  |
-|---------------|----------------------------------------------|
-| `Trace.cs`    | Static class for all tracing + debug         |
-| `EasyTrace.cs`| Example MonoBehaviour using `Trace` tools    |
+```csharp
+public static void DrawMovementSphere(Vector3 position, float duration, Color color)
+```
 
----
+```csharp
+public static void DrawDebugSphere(Vector3 position, float radius, Color color, float duration = DEBUG_DRAW_DURATION, int segments = 20)
+```
 
-## 📄 License
+```csharp
+public static void DrawHitPoint(Vector3 point, float size, Color color, float duration = DEBUG_DRAW_DURATION)
+```
 
-This project is licensed under the **MIT License** – feel free to use, modify, and distribute.
+```csharp
+public static void DrawFrustum(Camera camera, Color color, float duration = DEBUG_DRAW_DURATION)
+```
+
+```csharp
+public static void DrawFovPlaneDistance(Camera camera, float distance, Color? color = null, float duration = DEBUG_DRAW_DURATION)
+```
