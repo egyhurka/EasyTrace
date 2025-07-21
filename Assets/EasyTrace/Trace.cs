@@ -80,7 +80,7 @@ public static class Trace
         if (valid)
         {
             Debug.DrawRay(ray.origin, hit.point - ray.origin, Color.green, duration);
-            DrawHitPoint(hit.point, 0.1f, Color.cyan);
+            DrawHitPoint(hit.point, 0.1f, Color.cyan, duration);
             Debug.DrawRay(hit.point, ray.direction * (distance - Vector3.Distance(ray.origin, hit.point)), Color.red, duration);
         }
         else
@@ -107,7 +107,7 @@ public static class Trace
 
                 Vector3 closestPoint = collider.ClosestPoint(origin);
                 Debug.DrawLine(origin, closestPoint, color, duration);
-                DrawHitPoint(closestPoint, 0.3f, Color.cyan);
+                DrawHitPoint(closestPoint, 0.3f, Color.cyan, duration);
             }
 
             DrawDebugSphere(origin, radius, color, duration);
