@@ -58,10 +58,17 @@ if (Trace.Sphere(transform.position, 3f, Trace.DEFAULT_LAYER, out Collider[] hit
 }
 ```
 
-### 4. Draw Sphere Movement Trail (Editor-only)
+### 4. Draw Movement Trail (Editor-only)
 
 ```csharp
-Trace.MovementSphere(transform.position, 3f, Color.red);
+Trace.Movement(lastPosition, transform.position, 1f, Color.red);
+lastPosition = transform.position;
+```
+
+### 5. Draw Sphere Movement Trail (Editor-only)
+
+```csharp
+Trace.MovementSphere(transform.position, 1f, Color.red);
 ```
 
 ## 🛠️ Included Files
