@@ -203,6 +203,7 @@ public static class Trace
     /// <param name="hits">
     /// The array of <see cref="RaycastHit"/> results to filter. 
     /// This parameter is passed by reference and will be replaced with a new array containing only the first hit for each unique collider.
+    /// Use like this: Trace.RemoveSameHits(ref hits);
     /// </param>
     public static void RemoveSameHits(ref RaycastHit[] hits)
     {
